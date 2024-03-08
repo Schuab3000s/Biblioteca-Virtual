@@ -178,21 +178,20 @@ public class TelaEmprestarLivro extends javax.swing.JFrame {
 
             if (livro != null && cliente != null) {
 
-                Emprestimo emprestimo = new Emprestimo();
-                emprestimo.setLivro(livro);
-                emprestimo.setCliente(cliente);
-                emprestimo.setData(data);
+                Emprestimo emprestimo = new Emprestimo(livro, cliente, data);
+                Listagem.Adicionar(emprestimo);
 
                 JOptionPane.showMessageDialog(null, "Empréstimo realizado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+
+                TelaEmprestimo tela = new TelaEmprestimo();
+                tela.atualizarLista();
+                tela.setVisible(true);
+                dispose();
+
             } else {
                 JOptionPane.showMessageDialog(null, "Livro ou cliente não encontrado!", "Aviso", JOptionPane.WARNING_MESSAGE);
             }
         }
-
-        TelaEmprestimo tela = new TelaEmprestimo();
-        tela.setVisible(true);
-        dispose();
-
     }//GEN-LAST:event_btnEmprestarActionPerformed
 
     /**

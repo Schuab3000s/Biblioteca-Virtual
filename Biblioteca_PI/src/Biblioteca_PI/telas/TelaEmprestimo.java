@@ -11,13 +11,12 @@ import javax.swing.table.TableRowSorter;
 public class TelaEmprestimo extends javax.swing.JFrame {
 
     private TableRowSorter<DefaultTableModel> sorter;
-    private final List<Emprestimo> listaEmprestimo = Listagem.ListarEmprestimo();
-
-    private final String[] tableColoumns = {"Livro", "Cliente", "Data", "Devolvido"};
-    DefaultTableModel tableModel = new DefaultTableModel(tableColoumns, 0);
+    private DefaultTableModel tableModel;
+    List<Emprestimo> listaEmprestimo = Listagem.ListarEmprestimo();
 
     public TelaEmprestimo() {
         initComponents();
+        tableModel = (DefaultTableModel) tblEmprestimo.getModel();
         criarSorter();
         atualizarLista();
     }
@@ -117,7 +116,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -220,7 +219,41 @@ public class TelaEmprestimo extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         buscar();
+        txtBuscarEmprestimo.setText("");
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void criarSorter() {
+        sorter = new TableRowSorter<>(tableModel);
+        tblEmprestimo.setRowSorter(sorter);
+    }
+
+    public void atualizarLista() {
+        tableModel.setRowCount(0);
+
+        for (Emprestimo emprestimo : listaEmprestimo) {
+            String nomeLivro = "";
+            String nomeCliente = "";
+            String data = emprestimo.getData();
+            boolean devolvido = emprestimo.isDevolvido();
+
+            if (emprestimo.getLivro() != null) {
+                nomeLivro = emprestimo.getLivro().getNome();
+            }
+
+            if (emprestimo.getCliente() != null) {
+                nomeCliente = emprestimo.getCliente().getNome();
+            }
+
+            Object[] rowData = {nomeLivro, nomeCliente, data, devolvido};
+            tableModel.addRow(rowData);
+        }
+    }
+
+    private void buscar() {
+        String filtro = txtBuscarEmprestimo.getText();
+        RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i)" + filtro);
+        sorter.setRowFilter(rowFilter);
+    }
 
     private void labelCelularMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelCelularMouseClicked
         JOptionPane.showInputDialog(null, "Enviar menssagem com o seguinte texto:", "Enviar menssagem para **(21) 98765-4321**", JOptionPane.INFORMATION_MESSAGE);
@@ -261,33 +294,6 @@ public class TelaEmprestimo extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Selecione uma linha para excluir.", "Aviso", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
-
-    private void criarSorter() {
-        sorter = new TableRowSorter<>(tableModel);
-        tblEmprestimo.setRowSorter(sorter);
-    }
-
-    private void atualizarLista() {
-
-        tableModel.setRowCount(0);
-
-        for (Emprestimo emprestimo : listaEmprestimo) {
-
-            Object[] rowData = {
-                emprestimo.getLivro(),
-                emprestimo.getCliente(),
-                emprestimo.getData(),
-                emprestimo.isDevolvido()
-            };
-            tableModel.addRow(rowData);
-        }
-    }
-
-    private void buscar() {
-        String filtro = txtBuscarEmprestimo.getText();
-        RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("(?i)" + filtro);
-        sorter.setRowFilter(rowFilter);
-    }
 
     /**
      * @param args the command line arguments

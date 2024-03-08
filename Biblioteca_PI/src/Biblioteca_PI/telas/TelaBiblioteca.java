@@ -278,6 +278,7 @@ public class TelaBiblioteca extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         buscar();
+        txtBuscarLivro.setText("");
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnCadastrarLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarLivroActionPerformed

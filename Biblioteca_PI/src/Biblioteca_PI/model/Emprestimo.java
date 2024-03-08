@@ -2,11 +2,17 @@ package Biblioteca_PI.model;
 
 public class Emprestimo {
 
+    private Livros livro;
+    private Cliente cliente;
+    private String data;
+    private boolean devolvido;
     
-    Livros livro;
-    Cliente cliente;
-    String data;
-    boolean devolvido;
+    public Emprestimo(Livros livro, Cliente cliente, String data) {
+        this.livro = livro;
+        this.cliente = cliente;
+        this.data = data;
+        this.devolvido = false; 
+    }
 
     public boolean isDevolvido() {
         return devolvido;
@@ -39,7 +45,5 @@ public class Emprestimo {
     public void setData(String data) {
         this.data = data;
     }
-    
-    
-    
+
 }
