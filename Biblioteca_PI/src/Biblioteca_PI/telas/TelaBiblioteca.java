@@ -29,11 +29,13 @@ public class TelaBiblioteca extends javax.swing.JFrame {
 
         if (!listaLivros.isEmpty()) {
             for (Livros livro : listaLivros) {
+                String emprestado = livro.isEmprestado() ? "Sim" : "Não";
                 String[] rowData = {
                     livro.getNome(),
                     livro.getAutor(),
                     livro.getGenero(),
-                    String.valueOf(livro.getAno())
+                    String.valueOf(livro.getAno()),
+                    emprestado
                 };
                 tableModel.addRow(rowData);
             }

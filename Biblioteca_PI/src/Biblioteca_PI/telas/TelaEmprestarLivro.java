@@ -12,9 +12,6 @@ import javax.swing.JOptionPane;
  */
 public class TelaEmprestarLivro extends javax.swing.JFrame {
 
-    /**
-     * Creates new form TelaEmprestarLivro
-     */
     public TelaEmprestarLivro() {
         initComponents();
     }
@@ -180,6 +177,7 @@ public class TelaEmprestarLivro extends javax.swing.JFrame {
 
                 Emprestimo emprestimo = new Emprestimo(livro, cliente, data);
                 Listagem.Adicionar(emprestimo);
+                livro.setEmprestado(true);
 
                 JOptionPane.showMessageDialog(null, "Empréstimo realizado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 

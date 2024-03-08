@@ -116,7 +116,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -234,7 +234,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
             String nomeLivro = "";
             String nomeCliente = "";
             String data = emprestimo.getData();
-            boolean devolvido = emprestimo.isDevolvido();
+            String devolvido = emprestimo.isDevolvido()?"Sim":"Não";
 
             if (emprestimo.getLivro() != null) {
                 nomeLivro = emprestimo.getLivro().getNome();

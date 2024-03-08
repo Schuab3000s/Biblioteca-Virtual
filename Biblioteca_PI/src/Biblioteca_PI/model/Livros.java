@@ -3,7 +3,12 @@ package Biblioteca_PI.model;
 public class Livros {
 
     String nome, genero, autor;
-    int id, ano;
+    int ano;
+    boolean emprestado;
+
+    public Livros() {
+        this.emprestado = false;
+    }
 
     public String getAutor() {
         return autor;
@@ -37,11 +42,12 @@ public class Livros {
         this.genero = genero;
     }
 
-    public int getId() {
-        return id;
+    public boolean isEmprestado() {
+        return emprestado;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setEmprestado(boolean emprestado) {
+        this.emprestado = emprestado;
     }
+
 }
