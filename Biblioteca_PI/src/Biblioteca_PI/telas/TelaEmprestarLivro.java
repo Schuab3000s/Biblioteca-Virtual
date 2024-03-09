@@ -4,6 +4,7 @@ import Biblioteca_PI.model.Cliente;
 import Biblioteca_PI.model.Emprestimo;
 import Biblioteca_PI.model.Listagem;
 import Biblioteca_PI.model.Livros;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -155,6 +156,8 @@ public class TelaEmprestarLivro extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Preencha todos os campos", "Aviso", JOptionPane.WARNING_MESSAGE);
         } else if (testeData == false) {
             JOptionPane.showMessageDialog(null, "Preencha corretamente o campo de data\nNo formato dd/mm/aaaa", "Aviso", JOptionPane.WARNING_MESSAGE);
+        } else if (livroEstaEmprestado(nomeLivro)) {
+            JOptionPane.showMessageDialog(this, "O livro selecionado já está emprestado.", "Aviso", JOptionPane.WARNING_MESSAGE);
         } else {
 
             Livros livro = null;
@@ -192,6 +195,16 @@ public class TelaEmprestarLivro extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEmprestarActionPerformed
 
+    private boolean livroEstaEmprestado(String nomeLivro) {
+        List<Emprestimo> listaEmprestimos = Listagem.ListarEmprestimo();
+        for (Emprestimo emprestimo : listaEmprestimos) {
+            if (emprestimo.getLivro().getNome().equalsIgnoreCase(nomeLivro) && !emprestimo.isDevolvido()) {
+                return true; // Livro encontrado em um empréstimo ativo
+            }
+        }
+        return false; // Livro não encontrado em empréstimo ativo
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -206,16 +219,24 @@ public class TelaEmprestarLivro extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaEmprestarLivro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaEmprestarLivro.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaEmprestarLivro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaEmprestarLivro.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaEmprestarLivro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaEmprestarLivro.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaEmprestarLivro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaEmprestarLivro.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 

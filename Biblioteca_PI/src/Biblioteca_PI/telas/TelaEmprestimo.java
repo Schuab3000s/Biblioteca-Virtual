@@ -2,6 +2,7 @@ package Biblioteca_PI.telas;
 
 import Biblioteca_PI.model.Emprestimo;
 import Biblioteca_PI.model.Listagem;
+import Biblioteca_PI.model.Livros;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
@@ -35,6 +36,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         btnBuscar = new javax.swing.JButton();
         logoBiblioteca = new javax.swing.JLabel();
         btnEmprestarLivro = new javax.swing.JButton();
+        btnDevolver = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblEmprestimo = new javax.swing.JTable();
         BarraRodape = new javax.swing.JPanel();
@@ -75,6 +77,14 @@ public class TelaEmprestimo extends javax.swing.JFrame {
             }
         });
 
+        btnDevolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Biblioteca_PI/imagens/guardar.png"))); // NOI18N
+        btnDevolver.setText("Devolver Livro");
+        btnDevolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDevolverActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout BarraMenuLayout = new javax.swing.GroupLayout(BarraMenu);
         BarraMenu.setLayout(BarraMenuLayout);
         BarraMenuLayout.setHorizontalGroup(
@@ -82,12 +92,14 @@ public class TelaEmprestimo extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BarraMenuLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(logoBiblioteca)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 214, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addComponent(txtBuscarEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnBuscar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnEmprestarLivro)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnDevolver)
                 .addContainerGap())
         );
         BarraMenuLayout.setVerticalGroup(
@@ -98,7 +110,8 @@ public class TelaEmprestimo extends javax.swing.JFrame {
                     .addComponent(txtBuscarEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar)
                     .addComponent(logoBiblioteca)
-                    .addComponent(btnEmprestarLivro))
+                    .addComponent(btnEmprestarLivro)
+                    .addComponent(btnDevolver))
                 .addContainerGap(8, Short.MAX_VALUE))
         );
 
@@ -234,7 +247,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
             String nomeLivro = "";
             String nomeCliente = "";
             String data = emprestimo.getData();
-            String devolvido = emprestimo.isDevolvido()?"Sim":"Não";
+            String devolvido = emprestimo.isDevolvido() ? "Sim" : "Não";
 
             if (emprestimo.getLivro() != null) {
                 nomeLivro = emprestimo.getLivro().getNome();
@@ -295,6 +308,29 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
+    private void btnDevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevolverActionPerformed
+        int linhaSelecionada = tblEmprestimo.getSelectedRow();
+        Livros livro = null;
+        
+
+        if (linhaSelecionada != -1) {
+            List<Emprestimo> listaEmprestimos = Listagem.ListarEmprestimo();
+
+            Emprestimo emprestimo = listaEmprestimos.get(linhaSelecionada);
+            livro = emprestimo.getLivro();
+
+            emprestimo.setDevolvido(true);
+            livro.setEmprestado(false);
+
+            atualizarLista();
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione um livro para devolver.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
+
+
+    }//GEN-LAST:event_btnDevolverActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -334,6 +370,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
     private javax.swing.JPanel BarraMenu;
     private javax.swing.JPanel BarraRodape;
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnDevolver;
     private javax.swing.JButton btnEmprestarLivro;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnVoltar;

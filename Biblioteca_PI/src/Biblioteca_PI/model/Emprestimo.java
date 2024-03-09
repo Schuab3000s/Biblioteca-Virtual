@@ -13,6 +13,10 @@ public class Emprestimo {
         this.data = data;
         this.devolvido = false; 
     }
+    
+    public Emprestimo(){
+        
+    }
 
     public boolean isDevolvido() {
         return devolvido;
