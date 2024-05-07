@@ -1,5 +1,9 @@
 package Biblioteca_PI.telas;
 
+/**
+ *
+ * @author schuab
+ */
 import Biblioteca_PI.model.Listagem;
 import Biblioteca_PI.model.Livros;
 import java.util.List;
@@ -12,7 +16,6 @@ public class TelaBiblioteca extends javax.swing.JFrame {
 
     private TableRowSorter<DefaultTableModel> sorter;
     private final List<Livros> listaLivros = Listagem.ListarLivro();
-
     private final String[] tableColoumns = {"Livro", "Autor", "Gênero", "Ano", "Emprestado"};
     DefaultTableModel tableModel = new DefaultTableModel(tableColoumns, 0);
 

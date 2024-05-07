@@ -2,8 +2,15 @@ package Biblioteca_PI.model;
 
 public class Funcionario {
     
-    String nome, cpf, enderco, email;
+    String nome, cpf, senha, email;
 
+    public Funcionario(String nome, String senha, String cpf, String email) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.senha = senha;
+        this.email = email;
+    }
+    
     public String getNome() {
         return nome;
     }
@@ -20,12 +27,12 @@ public class Funcionario {
         this.cpf = cpf;
     }
 
-    public String getEnderco() {
-        return enderco;
+    public String getSenha() {
+        return senha;
     }
 
-    public void setEnderco(String enderco) {
-        this.enderco = enderco;
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public String getEmail() {

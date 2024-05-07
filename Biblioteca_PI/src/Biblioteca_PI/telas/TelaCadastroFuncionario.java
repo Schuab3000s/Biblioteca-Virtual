@@ -41,7 +41,7 @@ public class TelaCadastroFuncionario extends javax.swing.JFrame {
         txtNome = new javax.swing.JTextField();
         txtCpf = new javax.swing.JFormattedTextField();
         txtEmail = new javax.swing.JTextField();
-        txtEndereco = new javax.swing.JTextField();
+        txtSenha = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,7 +66,7 @@ public class TelaCadastroFuncionario extends javax.swing.JFrame {
 
         jLabel2.setText("Nome:");
 
-        jLabel3.setText("Endereço:");
+        jLabel3.setText("Senha:");
 
         jLabel4.setText("CPF:");
 
@@ -100,7 +100,7 @@ public class TelaCadastroFuncionario extends javax.swing.JFrame {
                             .addComponent(txtEmail)
                             .addComponent(txtCpf, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
                             .addComponent(btnCadastrar, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtEndereco))))
+                            .addComponent(txtSenha))))
                 .addContainerGap(41, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -119,7 +119,7 @@ public class TelaCadastroFuncionario extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -165,23 +165,18 @@ public class TelaCadastroFuncionario extends javax.swing.JFrame {
     private void cadastrar() {
 
         String nome = txtNome.getText();
-        String endereco = txtEndereco.getText();
+        String senha = txtSenha.getText();
         String cpf = txtCpf.getText();
         String email = txtEmail.getText();
 
         boolean testeCpf = cpf.matches("[0-9]{3}[.][0-9]{3}[.][0-9]{3}[-][0-9]{2}");
 
-        if (nome.isEmpty() || endereco.isEmpty() || cpf.isEmpty() || email.isEmpty()) {
+        if (nome.isEmpty() || senha.isEmpty() || cpf.isEmpty() || email.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!", "Aviso", JOptionPane.WARNING_MESSAGE);
         } else if (testeCpf == false) {
             JOptionPane.showMessageDialog(null, "Preencha corretamente o campo de CPF\nNo formato: 000.000.000-00", "Aviso", JOptionPane.WARNING_MESSAGE);
         } else {
-            Funcionario funcionario = new Funcionario();
-
-            funcionario.setNome(nome);
-            funcionario.setEnderco(endereco);
-            funcionario.setCpf(cpf);
-            funcionario.setEmail(email);
+            Funcionario funcionario = new Funcionario(nome, senha, cpf, email);
 
             Listagem.Adicionar(funcionario);
             JOptionPane.showMessageDialog(null, " Cadastrados feito com sucesso.");
@@ -240,7 +235,7 @@ public class TelaCadastroFuncionario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JFormattedTextField txtCpf;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtEndereco;
     private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtSenha;
     // End of variables declaration//GEN-END:variables
 }
