@@ -45,6 +45,7 @@ id_emprestimo int not null auto_increment,
 data_pedido date,
 livro_id int,
 cliente_id int,
+emprestado VARCHAR(3);
 primary key (id_emprestimo),
 foreign key (livro_id) references livro(id_livro),
 foreign key (cliente_id) references cliente(id_cliente)
