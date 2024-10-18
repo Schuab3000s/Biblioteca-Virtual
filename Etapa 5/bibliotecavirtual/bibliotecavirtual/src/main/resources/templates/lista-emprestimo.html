@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Empréstimos</title>
+    <link rel="stylesheet" th:href="@{/css/lista-emprestimo.css}">
+</head>
+<body>
+    <div class="lista-container">
+        <h2>Biblioteca Virtual - Empréstimos</h2>
+        <div class="header-buttons">
+            <input type="text" placeholder="Buscar empréstimo..." />
+            <button class="btn-buscar">Buscar</button>
+            <button class="btn-emprestar">Emprestar Livro</button>
+            <button class="btn-devolver">Devolver Livro</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Livro</th>
+                    <th>Cliente</th>
+                    <th>Data</th>
+                    <th>Emprestado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>teste 01</td>
+                    <td>Kevin</td>
+                    <td>2024-10-18</td>
+                    <td>Sim</td>
+                </tr>
+                <!-- Outras linhas de empréstimos -->
+            </tbody>
+        </table>
+        <div class="footer-buttons">
+            <button class="btn-excluir">Excluir</button>
+            <button class="btn-voltar">Voltar</button>
+        </div>
+    </div>
+</body>
+</html>
