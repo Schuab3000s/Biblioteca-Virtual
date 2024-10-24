@@ -10,14 +10,14 @@
 <body>
     <div class="login-container">
         <h2>Bem-vindo</h2>
-        <form th:action="@{/login}" method="post">
+        <form th:action="@{/perform_login}" method="post">
             <div class="form-group">
-                <label for="login">Login:</label>
-                <input type="text" id="login" name="login" />
+                <label for="username">Login:</label>
+                <input type="text" id="username" name="username" />
             </div>
             <div class="form-group">
-                <label for="senha">Senha:</label>
-                <input type="password" id="senha" name="senha" />
+                <label for="password">Senha:</label>
+                <input type="password" id="password" name="password" />
             </div>
             <div class="buttons">
                 <button type="submit" class="btn-entrar">Entrar</button>
