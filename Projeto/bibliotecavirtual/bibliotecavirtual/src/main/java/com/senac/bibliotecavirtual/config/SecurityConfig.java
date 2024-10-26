@@ -23,15 +23,15 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(authorizeRequests
                         -> authorizeRequests
-                        .requestMatchers("/login", "/css/**", "/js/**").permitAll() // Permitir o acesso à página de login e arquivos estáticos
+                        .requestMatchers("/login", "/css/**", "/js/**", "/error", "/livros").permitAll() // Permitir o acesso às páginas de login, CSS, JS e erro
                         .anyRequest().authenticated() // Qualquer outra página precisa de autenticação
                 )
                 .formLogin(formLogin
                         -> formLogin
-                        .loginPage("/login") // URL da página de login
-                        .loginProcessingUrl("/perform_login") // Processa o login
-                        .defaultSuccessUrl("/home", true) // Redireciona após o login bem-sucedido
-                        .failureUrl("/login?error=true") // Redireciona em caso de erro
+                        .loginPage("/login") // URL da página de login personalizada
+                        .loginProcessingUrl("/perform_login") // URL para processar o login
+                        .defaultSuccessUrl("/livros", true) // Redirecionar após o login bem-sucedido
+                        .failureUrl("/login?error=true") // Redirecionar se falhar
                         .permitAll()
                 )
                 .logout(logout

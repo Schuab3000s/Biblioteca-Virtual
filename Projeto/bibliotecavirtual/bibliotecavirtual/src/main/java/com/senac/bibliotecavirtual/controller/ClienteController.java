@@ -9,6 +9,8 @@ import com.senac.bibliotecavirtual.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 /**
  *
@@ -27,17 +29,27 @@ public class ClienteController {
     }
 
     @GetMapping("/{id}")
-    public Cliente getClienteById(@PathVariable int id) {
-        return clienteService.findById(id);
+    public ResponseEntity<Cliente> getClienteById(@PathVariable Long id) {
+        return clienteService.findById(id)
+                .map(cliente -> ResponseEntity.ok(cliente))
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public Cliente createCliente(@RequestBody Cliente cliente) {
-        return clienteService.save(cliente);
+    public ResponseEntity<Cliente> createCliente(@RequestBody Cliente cliente) {
+        Cliente newCliente = clienteService.save(cliente);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newCliente);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Cliente> updateCliente(@PathVariable Long id, @RequestBody Cliente cliente) {
+        return clienteService.update(id, cliente)
+                .map(clienteAtualizado -> ResponseEntity.ok(clienteAtualizado))
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCliente(@PathVariable int id) {
+    public void deleteCliente(@PathVariable Long id) {
         clienteService.deleteById(id);
     }
 }

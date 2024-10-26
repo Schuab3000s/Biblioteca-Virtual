@@ -10,9 +10,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author kevin
  */
-public interface GeneroRepository extends JpaRepository<Genero, Integer> {
+public interface GeneroRepository extends JpaRepository<Genero, Long> {
 
-    public Optional<Genero> findById(int id);
+    public Optional<Genero> findById(Long id);
 
-    public void deleteById(int id);
+    public void deleteById(Long id);
 }

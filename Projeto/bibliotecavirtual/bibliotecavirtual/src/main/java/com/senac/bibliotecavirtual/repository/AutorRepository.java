@@ -10,5 +10,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author kevin
  */
-public interface AutorRepository extends JpaRepository<Autor, Integer> {
+public interface AutorRepository extends JpaRepository<Autor, Long> {
 }

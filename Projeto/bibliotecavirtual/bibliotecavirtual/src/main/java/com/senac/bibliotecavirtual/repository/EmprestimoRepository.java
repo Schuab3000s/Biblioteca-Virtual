@@ -12,9 +12,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author kevin
  */
-public interface EmprestimoRepository extends JpaRepository<Emprestimo, Integer> {
+public interface EmprestimoRepository extends JpaRepository<Emprestimo, Long> {
 
-    public Optional<Emprestimo> findById(Integer id);
+    public Optional<Emprestimo> findById(Long id);
 
-    public void deleteById(Integer id);
+    public void deleteById(Long id);
 }

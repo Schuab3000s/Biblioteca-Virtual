@@ -34,7 +34,7 @@ public class GeneroController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Genero> findById(@PathVariable int id) {
+    public ResponseEntity<Genero> findById(@PathVariable Long id) {
         return generoService.findById(id)
                 .map(genero -> ResponseEntity.ok(genero))
                 .orElse(ResponseEntity.notFound().build());
@@ -46,7 +46,7 @@ public class GeneroController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable int id) {
+    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         generoService.deleteById(id);
         return ResponseEntity.noContent().build();
     }

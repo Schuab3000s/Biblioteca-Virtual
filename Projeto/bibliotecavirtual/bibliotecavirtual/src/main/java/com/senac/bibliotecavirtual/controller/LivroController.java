@@ -34,7 +34,7 @@ public class LivroController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Livro> findById(@PathVariable int id) {
+    public ResponseEntity<Livro> findById(@PathVariable Long id) {
         return livroService.findById(id)
                 .map(livro -> ResponseEntity.ok(livro))
                 .orElse(ResponseEntity.notFound().build());
@@ -46,7 +46,7 @@ public class LivroController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable int id) {
+    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         livroService.deleteById(id);
         return ResponseEntity.noContent().build();
     }

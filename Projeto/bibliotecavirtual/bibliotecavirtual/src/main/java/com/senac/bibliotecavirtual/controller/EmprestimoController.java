@@ -34,7 +34,7 @@ public class EmprestimoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Emprestimo> findById(@PathVariable Integer id) {
+    public ResponseEntity<Emprestimo> findById(@PathVariable Long id) {
         return emprestimoService.findById(id)
                 .map(emprestimo -> ResponseEntity.ok(emprestimo))
                 .orElse(ResponseEntity.notFound().build());
@@ -46,7 +46,7 @@ public class EmprestimoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         emprestimoService.deleteById(id);
         return ResponseEntity.noContent().build();
     }

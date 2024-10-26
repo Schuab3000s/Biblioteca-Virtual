@@ -9,6 +9,8 @@ import com.senac.bibliotecavirtual.repository.AutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
+
 /**
  *
  * @author kevin
@@ -19,6 +21,10 @@ public class AutorService {
     @Autowired
     private AutorRepository autorRepository;
 
+    public Optional<Autor> findById(Long id) {
+        return autorRepository.findById(id);
+    }
+
     public List<Autor> findAll() {
         return autorRepository.findAll();
     }
@@ -27,11 +33,19 @@ public class AutorService {
         return autorRepository.save(autor);
     }
 
-    public void deleteById(int id) {
-        autorRepository.deleteById(id);
+    public Optional<Autor> update(Long id, Autor autorAtualizado) {
+        return autorRepository.findById(id).map(autorExistente -> {
+            autorExistente.setNome(autorAtualizado.getNome());
+
+            return autorRepository.save(autorExistente);
+        });
     }
 
-    public Autor findById(int id) {
-        return autorRepository.findById(id).orElse(null);
+    public boolean delete(Long id) {
+        if (autorRepository.existsById(id)) {
+            autorRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }
