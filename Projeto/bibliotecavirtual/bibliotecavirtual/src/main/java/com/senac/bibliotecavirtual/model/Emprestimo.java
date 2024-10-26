@@ -17,7 +17,7 @@ public class Emprestimo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Temporal(TemporalType.DATE)
     private Date data_pedido;
@@ -41,11 +41,11 @@ public class Emprestimo {
     
     public Emprestimo(){}
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
