@@ -25,7 +25,7 @@ public class LivroService {
         return livroRepository.findAll();
     }
 
-    public Optional<Livro> findById(int id) {
+    public Optional<Livro> findById(Long id) {
         return livroRepository.findById(id);
     }
 
@@ -33,7 +33,7 @@ public class LivroService {
         return livroRepository.save(livro);
     }
 
-    public void deleteById(int id) {
+    public void deleteById(Long id) {
         livroRepository.deleteById(id);
     }
 }

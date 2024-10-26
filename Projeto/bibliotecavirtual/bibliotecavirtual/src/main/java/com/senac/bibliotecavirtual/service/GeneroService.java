@@ -25,7 +25,7 @@ public class GeneroService {
         return generoRepository.findAll();
     }
 
-    public Optional<Genero> findById(int id) {
+    public Optional<Genero> findById(Long id) {
         return generoRepository.findById(id);
     }
 
@@ -33,7 +33,7 @@ public class GeneroService {
         return generoRepository.save(genero);
     }
 
-    public void deleteById(int id) {
+    public void deleteById(Long id) {
         generoRepository.deleteById(id);
     }
 }

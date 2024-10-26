@@ -25,7 +25,7 @@ public class EmprestimoService {
         return emprestimoRepository.findAll();
     }
 
-    public Optional<Emprestimo> findById(Integer id) {
+    public Optional<Emprestimo> findById(Long id) {
         return emprestimoRepository.findById(id);
     }
 
@@ -33,7 +33,7 @@ public class EmprestimoService {
         return emprestimoRepository.save(emprestimo);
     }
 
-    public void deleteById(Integer id) {
+    public void deleteById(Long id) {
         emprestimoRepository.deleteById(id);
     }
 }
