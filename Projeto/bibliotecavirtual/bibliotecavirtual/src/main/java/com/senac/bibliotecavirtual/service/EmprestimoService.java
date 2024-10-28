@@ -6,6 +6,7 @@ package com.senac.bibliotecavirtual.service;
 
 import com.senac.bibliotecavirtual.model.Emprestimo;
 import com.senac.bibliotecavirtual.repository.EmprestimoRepository;
+import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,25 @@ public class EmprestimoService {
         return emprestimoRepository.save(emprestimo);
     }
 
-    public void deleteById(Long id) {
-        emprestimoRepository.deleteById(id);
+    public void delete(Long id) {
+        if (emprestimoRepository.existsById(id)) {
+            emprestimoRepository.deleteById(id);
+        } else {
+            throw new EntityNotFoundException("Empréstimo não encontrado com o ID: " + id);
+        }
     }
+
+    public Optional<Emprestimo> update(Long id, Emprestimo emprestimoAtualizado) {
+        return emprestimoRepository.findById(id)
+                .map(emprestimoExistente -> {
+
+                    emprestimoExistente.setData_pedido(emprestimoAtualizado.getData_pedido());
+                    emprestimoExistente.setCliente(emprestimoAtualizado.getCliente());
+                    emprestimoExistente.setLivro(emprestimoAtualizado.getLivro());
+                    emprestimoExistente.setEmprestado(emprestimoAtualizado.getEmprestado());
+
+                    return emprestimoRepository.save(emprestimoExistente);
+                });
+    }
+
 }

@@ -34,6 +34,20 @@ public class LivroService {
     }
 
     public void deleteById(Long id) {
-        livroRepository.deleteById(id);
+        livroRepository.findById(id).ifPresent(livroRepository::delete);
+    }
+
+    public Optional<Livro> updateById(Long id, Livro livro) {
+        return livroRepository.findById(id)
+                .map(existingLivro -> {
+                    existingLivro.setNome(livro.getNome());
+                    existingLivro.setAutor(livro.getAutor());
+                    existingLivro.setGenero(livro.getGenero());
+                    existingLivro.setData_lancamento(livro.getData_lancamento());
+                    
+                    livroRepository.save(existingLivro);
+                    return existingLivro;
+                });
+                
     }
 }

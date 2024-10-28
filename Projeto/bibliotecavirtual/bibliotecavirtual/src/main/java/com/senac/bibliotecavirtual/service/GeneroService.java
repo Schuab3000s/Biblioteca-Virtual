@@ -34,6 +34,18 @@ public class GeneroService {
     }
 
     public void deleteById(Long id) {
-        generoRepository.deleteById(id);
+        generoRepository.findById(id).ifPresent(generoRepository::delete);
     }
+
+    public Optional<Genero> update(Long id, Genero generoAtualizado) {
+        return generoRepository.findById(id)
+                .map(generoExistente -> {
+                    // Atualiza os campos do gênero existente com os valores do gênero atualizado
+                    generoExistente.setGenero(generoAtualizado.getGenero());
+
+                    generoRepository.save(generoExistente);
+                    return generoExistente;
+                });
+    }
+
 }

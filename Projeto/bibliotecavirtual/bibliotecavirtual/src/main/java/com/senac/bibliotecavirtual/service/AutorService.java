@@ -33,7 +33,7 @@ public class AutorService {
         return autorRepository.save(autor);
     }
 
-    public Optional<Autor> update(Long id, Autor autorAtualizado) {
+    public Optional<Autor> updateById(Long id, Autor autorAtualizado) {
         return autorRepository.findById(id).map(autorExistente -> {
             autorExistente.setNome(autorAtualizado.getNome());
 
@@ -41,7 +41,7 @@ public class AutorService {
         });
     }
 
-    public boolean delete(Long id) {
+    public boolean deleteById(Long id) {
         if (autorRepository.existsById(id)) {
             autorRepository.deleteById(id);
             return true;
