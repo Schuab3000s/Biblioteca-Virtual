@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Empréstimos</title>
+    <link rel="stylesheet" href="css/lista-emprestimo.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Biblioteca Virtual</h1>
+            <div class="header-actions">
+                <input type="text" id="buscarEmprestimo" placeholder="Buscar empréstimo...">
+                <button onclick="buscarEmprestimos()">Buscar</button>
+                <button onclick="window.location.href='emprestimo-livro.html'">Emprestar Livro</button>
+            </div>
+        </header>
+        <main>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Livro</th>
+                        <th>Cliente</th>
+                        <th>Data</th>
+                        <th>Devolvido</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Linhas geradas dinamicamente -->
+                </tbody>
+            </table>
+        </main>
+        <footer>
+            <div class="footer-info">
+                <span>Contatos: (21)98765-4321</span>
+                <span>biblioteca@hotmail.com</span>
+            </div>
+            <div class="footer-buttons">
+                <button onclick="excluirEmprestimo()">Excluir</button>
+                <button onclick="window.location.href='lista-livros.html'">Voltar</button>
+            </div>
+        </footer>
+    </div>
+    <script src="js/lista-emprestimo.js"></script>
+</body>
+</html>

@@ -1,67 +1,65 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.senac.bibliotecavirtual.controller;
 
 import com.senac.bibliotecavirtual.model.Emprestimo;
-import com.senac.bibliotecavirtual.service.EmprestimoService;
-import jakarta.persistence.EntityNotFoundException;
-import java.util.List;
+import com.senac.bibliotecavirtual.repository.EmprestimoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-/**
- *
- * @author kevin
- */
+import java.util.List;
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/emprestimos")
 public class EmprestimoController {
 
     @Autowired
-    private EmprestimoService emprestimoService;
+    private EmprestimoRepository emprestimoRepository;
 
+    // Listar todos os empréstimos
     @GetMapping
-    public List<Emprestimo> findAll() {
-        return emprestimoService.findAll();
+    public List<Emprestimo> listarTodos() {
+        return emprestimoRepository.findAll();
     }
 
+    // Obter um empréstimo específico pelo ID
     @GetMapping("/{id}")
-    public ResponseEntity<Emprestimo> findById(@PathVariable Long id) {
-        return emprestimoService.findById(id)
-                .map(emprestimo -> ResponseEntity.ok(emprestimo))
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<Emprestimo> buscarPorId(@PathVariable Long id) {
+        Optional<Emprestimo> emprestimo = emprestimoRepository.findById(id);
+        return emprestimo.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    // Criar um novo empréstimo
     @PostMapping
-    public Emprestimo save(@RequestBody Emprestimo emprestimo) {
-        return emprestimoService.save(emprestimo);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Emprestimo> updateEmprestimo(@PathVariable Long id, @RequestBody Emprestimo emprestimo) {
-        return emprestimoService.update(id, emprestimo)
-                .map(emprestimoAtualizado -> ResponseEntity.ok(emprestimoAtualizado))
-                .orElse(ResponseEntity.notFound().build());
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteEmprestimo(@PathVariable Long id) {
+    public ResponseEntity<Emprestimo> criar(@RequestBody Emprestimo emprestimo) {
         try {
-            emprestimoService.delete(id);
-            return ResponseEntity.noContent().build();
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.notFound().build();
+            Emprestimo novoEmprestimo = emprestimoRepository.save(emprestimo);
+            return ResponseEntity.ok(novoEmprestimo);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
         }
     }
 
+    // Atualizar um empréstimo existente
+    @PutMapping("/{id}")
+    public ResponseEntity<Emprestimo> atualizar(@PathVariable Long id, @RequestBody Emprestimo emprestimoAtualizado) {
+        if (!emprestimoRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        emprestimoAtualizado.setId(id);
+        Emprestimo emprestimoSalvo = emprestimoRepository.save(emprestimoAtualizado);
+        return ResponseEntity.ok(emprestimoSalvo);
+    }
+
+    // Excluir um empréstimo
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        if (!emprestimoRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        emprestimoRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 }

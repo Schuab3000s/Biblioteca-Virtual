@@ -1,60 +1,49 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
+    background-color: #e8f5f2; /* Cor de fundo suave */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
 }
 
 .login-container {
-    max-width: 400px;
-    margin: 100px auto;
+    width: 400px;
     padding: 20px;
-    border: 1px solid #dee2e6;
     background-color: #ffffff;
-    border-radius: 5px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombreamento mais suave */
     text-align: center;
+    border: 1px solid #b2dfdb; /* Cor sutil nas bordas */
 }
 
 h2 {
     margin-bottom: 20px;
-}
-
-.form-group {
-    margin-bottom: 15px;
-    text-align: left;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
+    color: #66CDAA; /* Cor verde para título */
 }
 
 input[type="text"],
 input[type="password"] {
     width: 100%;
-    padding: 8px;
-    margin-top: 5px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
     box-sizing: border-box;
 }
 
-.buttons {
-    margin-top: 15px;
-}
-
-.btn-entrar, .btn-sair {
-    padding: 10px 20px;
-    background-color: #007bff;
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #66CDAA; /* Cor do botão */
     color: white;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
 }
 
-.btn-sair {
-    background-color: #6c757d;
-}
-
-.btn-entrar:hover {
-    background-color: #0056b3;
-}
-
-.btn-sair:hover {
-    background-color: #5a6268;
+button:hover {
+    background-color: #5cbfaa; /* Tom mais escuro no hover */
 }

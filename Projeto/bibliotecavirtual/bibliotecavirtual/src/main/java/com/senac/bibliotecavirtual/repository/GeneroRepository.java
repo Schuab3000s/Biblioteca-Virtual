@@ -1,18 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package com.senac.bibliotecavirtual.repository;
+
 import com.senac.bibliotecavirtual.model.Genero;
-import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
-/**
- *
- * @author kevin
- */
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
 public interface GeneroRepository extends JpaRepository<Genero, Long> {
 
-    public Optional<Genero> findById(Long id);
+    // Método para buscar gêneros pelo nome (case insensitive)
+    List<Genero> findByNomeContainingIgnoreCase(String genero);
 
-    public void deleteById(Long id);
+    // Método customizado para listar gêneros ordenados por nome
+    @Query("SELECT g FROM Genero g ORDER BY g.nome ASC")
+    List<Genero> listarGenerosOrdenados();
 }

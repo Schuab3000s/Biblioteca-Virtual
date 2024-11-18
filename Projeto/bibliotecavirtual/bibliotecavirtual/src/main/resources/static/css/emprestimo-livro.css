@@ -1,13 +1,17 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: #e8f5f2; /* Cor de fundo consistente com as outras páginas */
     color: #333;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 .form-container {
-    width: 50%;
-    margin: 50px auto;
-    background-color: #fff;
+    width: 60%; /* Ajuste para deixar mais confortável */
+    background-color: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -15,7 +19,8 @@ body {
 
 h2 {
     text-align: center;
-    color: #333;
+    color: #66CDAA; /* Destaque para o título */
+    margin-bottom: 20px;
 }
 
 .form-group {
@@ -26,6 +31,7 @@ label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
+    color: #333;
 }
 
 select, input[type="date"] {
@@ -33,22 +39,27 @@ select, input[type="date"] {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
 }
 
 .buttons {
     display: flex;
     justify-content: space-between;
+    margin-top: 20px;
 }
 
 button {
     padding: 10px 15px;
     border: none;
-    background-color: #007bff;
-    color: #fff;
+    background-color: #66CDAA;
+    color: white;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #5cbfaa;
 }

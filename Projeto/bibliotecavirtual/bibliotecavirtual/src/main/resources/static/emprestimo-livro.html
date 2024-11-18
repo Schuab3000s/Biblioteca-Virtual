@@ -1,37 +1,37 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Empréstimo de Livro</title>
-    <link rel="stylesheet" th:href="@{/css/emprestimo-livro.css}">
+    <link rel="stylesheet" href="css/emprestimo-livro.css">
 </head>
 <body>
     <div class="form-container">
         <h2>Empréstimo de Livro</h2>
-        <form th:action="@{/emprestimo-livro}" method="post">
+        <form id="emprestimoForm">
             <div class="form-group">
                 <label for="livro">Nome do Livro:</label>
                 <select id="livro" name="livro">
-                    <option value="teste 01">teste 01</option>
-                    <!-- Adicione outros livros -->
+                    <!-- Preenchido pelo JavaScript -->
                 </select>
             </div>
             <div class="form-group">
                 <label for="cliente">Nome do Cliente:</label>
                 <select id="cliente" name="cliente">
-                    <option value="Kevin">Kevin</option>
-                    <!-- Adicione outros clientes -->
+                    <!-- Preenchido pelo JavaScript -->
                 </select>
             </div>
             <div class="form-group">
                 <label for="data">Data:</label>
-                <input type="date" id="data" name="data" />
+                <input type="date" id="data" name="data">
             </div>
             <div class="buttons">
-                <button type="submit" class="btn-emprestar">Emprestar</button>
-                <button type="button" class="btn-voltar">Voltar</button>
+                <button type="submit" class="btn">Emprestar</button>
+                <button type="button" class="btn btn-secondary" onclick="history.back()">Voltar</button>
             </div>
         </form>
     </div>
+    <script src="js/emprestimo-livro.js"></script>
 </body>
 </html>

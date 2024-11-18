@@ -18,7 +18,7 @@ public class Genero {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String genero;
+    private String nome;
 
     public Long getId() {
         return id;
@@ -28,12 +28,12 @@ public class Genero {
         this.id = id;
     }
 
-    public String getGenero() {
-        return genero;
+    public String getNome() {
+        return nome;
     }
 
-    public void setGenero(String genero) {
-        this.genero = genero;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
 }

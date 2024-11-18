@@ -1,22 +1,68 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.querySelector('form');
-    
-    form.addEventListener('submit', function(event) {
-        const nome = document.getElementById('nome').value.trim();
-        const data = document.getElementById('data').value;
-        
-        if (nome === '' || data === '') {
-            alert('Por favor, preencha todos os campos.');
-            event.preventDefault(); // Impede o envio do formulário se houver campos vazios
+document.addEventListener("DOMContentLoaded", () => {
+    fetch("/autores")
+            .then(response => response.json())
+            .then(autores => {
+                const autorSelect = document.getElementById("autor");
+                autores.forEach(autor => {
+                    const option = document.createElement("option");
+                    option.value = autor.id;
+                    option.textContent = autor.nome;
+                    autorSelect.appendChild(option);
+                });
+            });
+
+    fetch("/generos")
+            .then(response => response.json())
+            .then(generos => {
+                const generoSelect = document.getElementById("genero");
+                generos.forEach(genero => {
+                    const option = document.createElement("option");
+                    option.value = genero.id;
+                    option.textContent = genero.nome;
+                    generoSelect.appendChild(option);
+                });
+            });
+
+    const form = document.getElementById("cadastroLivroForm");
+    form.addEventListener("submit", event => {
+        event.preventDefault();
+
+        // Objeto do livro
+        const livro = {
+            nome: document.getElementById("nome").value.trim(),
+            autorId: parseInt(document.getElementById("autor").value),
+            generoId: parseInt(document.getElementById("genero").value),
+            dataLancamento: document.getElementById("dataLancamento").value,
+        };
+
+        // Verificação de dados
+        if (!livro.nome || !livro.autorId || !livro.generoId || !livro.dataLancamento) {
+            alert("Por favor, preencha todos os campos.");
+            return;
         }
-        
-        // Validação da data (impede datas futuras)
-        const dataLancamento = new Date(data);
-        const dataAtual = new Date();
-        
-        if (dataLancamento > dataAtual) {
-            alert('A data de lançamento não pode ser no futuro.');
-            event.preventDefault();
-        }
+
+        // Enviar requisição POST
+        fetch("/livros", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(livro),
+        })
+                .then(response => {
+                    if (response.ok) {
+                        alert("Livro cadastrado com sucesso!");
+                        window.location.href = "/lista-livros.html";
+                    } else {
+                        return response.json().then(error => {
+                            console.error("Erro ao cadastrar livro:", error);
+                            alert("Erro ao cadastrar o livro: " + (error.message || "Erro desconhecido."));
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error("Erro na requisição:", error);
+                    alert("Erro ao conectar com o servidor.");
+                });
     });
 });

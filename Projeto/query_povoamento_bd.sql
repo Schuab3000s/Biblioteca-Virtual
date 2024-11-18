@@ -1,3 +1,4 @@
+use biblioteca;
 insert into genero (genero)
 values('Fantasia'),
 ('Romance'),
@@ -10,9 +11,9 @@ values('Fantasia'),
 ('Poesia'),
 ('História');
 
-insert into usuario (login, senha)
-values ('bibliotecaria', 'biblio123'),
-('user', 'user123');
+insert into usuario (username, password, role)
+values ('bibliotecaria', '$2a$10$MfU7xkIVRGZWILOdDMGcd./vgvq.SHf91Scremd1u6gc1Hb8daNlG', 'USER'),
+('user', '$2a$10$qaHDTkoFArsZRbPXchiSbez2KL2M9UEZYL5UJ5UyXBvHnSFICeAkO', 'USER');
 
 insert into autor(nome)
 values ('J. L. Rowling'),

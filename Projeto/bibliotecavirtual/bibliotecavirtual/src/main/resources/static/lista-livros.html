@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Livros</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h2>Biblioteca Virtual</h2>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Buscar livro...">
+                <button id="searchBtn">Buscar</button>
+                <button onclick="window.location.href='cadastro-cliente.html'">Novo Cliente</button>
+                <button onclick="window.location.href='cadastro-livro.html'">Novo Livro</button>
+            </div>
+        </header>
+        <table>
+            <thead>
+                <tr>
+                    <th>Livro</th>
+                    <th>Autor</th>
+                    <th>Gênero</th>
+                    <th>Ano</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <!-- Preenchido dinamicamente pelo JavaScript -->
+            </tbody>
+        </table>
+        <footer>
+            <div class="footer-info">
+                <span>Contatos: (21)98765-4321</span>
+                <span>biblioteca@hotmail.com</span>
+            </div>
+            <div class="footer-buttons">
+                <button onclick="window.location.href='lista-emprestimo.html'">Empréstimo</button>
+                <button onclick="alert('Excluir funcionalidade pendente')">Excluir</button>
+                <button onclick="window.location.href='login.html'">Sair</button>
+            </div>
+        </footer>
+    </div>
+    <script src="js/lista-livros.js"></script>
+</body>
+</html>

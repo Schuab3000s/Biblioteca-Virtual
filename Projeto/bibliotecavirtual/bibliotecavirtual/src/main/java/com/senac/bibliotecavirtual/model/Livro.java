@@ -9,7 +9,7 @@ package com.senac.bibliotecavirtual.model;
  * @author schuab
  */
 import jakarta.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "livro")
@@ -22,7 +22,7 @@ public class Livro {
     private String nome;
 
     @Temporal(TemporalType.DATE)
-    private Date data_lancamento;
+    private LocalDate data_lancamento;
 
     @ManyToOne
     @JoinColumn(name = "genero_id")
@@ -48,11 +48,11 @@ public class Livro {
         this.nome = nome;
     }
 
-    public Date getData_lancamento() {
+    public LocalDate getData_lancamento() {
         return data_lancamento;
     }
 
-    public void setData_lancamento(Date data_lancamento) {
+    public void setData_lancamento(LocalDate data_lancamento) {
         this.data_lancamento = data_lancamento;
     }
 
